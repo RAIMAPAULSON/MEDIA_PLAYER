@@ -8,7 +8,7 @@ const reqConfig = {
     data:reqBody
 }
 return await axios(reqConfig).then(res=>{
-
+  return res
  }).catch(err=>{
     return err
  })

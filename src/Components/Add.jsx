@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addVideoAPI } from '../services/allAPI';
 
-function Add() {
+function Add({setAddVideoResponse}) {
     const [videoDetails,setVideoDetails] = useState({
      caption : "",
      imageURL: "",
@@ -40,9 +40,13 @@ function Add() {
              const result = await addVideoAPI(videoDetails)
              console.log(result);
              if(result.status>=200 && result.status<300){
-                console.log("hellloooo");
+                console.log(result.data);
+                setAddVideoResponse(result.data)
+                setVideoDetails({caption:"",imageURL:"",youtubeURL:""})
                 toast.success(`${result.data.caption} is added to your collection!!!`)
                 handleClose()
+             }else{
+                toast.error(result.response.data)
              }
            }catch(err){
              console.log(err);
